@@ -1,26 +1,21 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Oct 16 17:02:40 2020
-
-@author: Vishal
-"""
 
 from bs4 import BeautifulSoup as bs
 import requests
 import pandas as pd
 
-
-bright_stars_url = 'https://en.wikipedia.org/wiki/List_of_brightest_stars_and_other_record_stars'
+# put the url from the PDF
+#bright_stars_url = 
 
 page = requests.get(bright_stars_url)
-print(page)
+#print(page)
 
 soup = bs(page.text,'html.parser')
+# use soup.find() by passing 'table' as parameter and assign to variable star_table
 
-star_table = soup.find('table')
+# take an empty list vaiable called temp_list
 
-temp_list= []
-table_rows = star_table.find_all('tr')
+#use star_table.find_all('tr') and assign to table_rows
+
 for tr in table_rows:
     td = tr.find_all('td')
     row = [i.text.rstrip() for i in td]
@@ -44,4 +39,4 @@ for i in range(1,len(temp_list)):
 df2 = pd.DataFrame(list(zip(Star_names,Distance,Mass,Radius,Lum)),columns=['Star_name','Distance','Mass','Radius','Luminosity'])
 print(df2)
 
-df2.to_csv('bright_stars.csv')
+#use df2.to_csv and pass a file name 
